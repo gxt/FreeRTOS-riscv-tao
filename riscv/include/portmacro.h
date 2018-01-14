@@ -60,12 +60,14 @@ extern void vPortYield( void );
 #define portYIELD()					vPortYield()
 
 /* Critical section management. */
+extern void vTaskEnterCritical( void );
+extern void vTaskExitCritical( void );
+#define portENTER_CRITICAL()				vTaskEnterCritical()
+#define portEXIT_CRITICAL()				vTaskExitCritical()
+
+/* Interrupt mask handlers. */
 extern int vPortSetInterruptMask( void );
 extern void vPortClearInterruptMask( int );
-extern void vPortEnterCritical( void );
-extern void vPortExitCritical( void );
-#define portENTER_CRITICAL()				vPortEnterCritical()
-#define portEXIT_CRITICAL()				vPortExitCritical()
 #define portSET_INTERRUPT_MASK_FROM_ISR()		vPortSetInterruptMask()
 #define portCLEAR_INTERRUPT_MASK_FROM_ISR( uxSavedStatusValue )		\
 		vPortClearInterruptMask( uxSavedStatusValue )

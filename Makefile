@@ -17,15 +17,26 @@ FREERTOS_SRC	:=							\
 		$(TOPDIR)/Source/event_groups.c				\
 		$(TOPDIR)/Source/portable/MemMang/heap_2.c
 
-FREERTOS_OBJ	:= $(FREERTOS_SRC:.c=.o)
+RISCV_SRC	:=							\
+		$(TOPDIR)/riscv/port.c					\
+		$(TOPDIR)/riscv/main.c
 
-OBJS		:= $(FREERTOS_OBJ)
+RISCV_ASM	:=							\
+		$(TOPDIR)/riscv/portasm.S
+
+
+FREERTOS_OBJ	:= $(FREERTOS_SRC:.c=.o)
+RISCV_OBJ	:= $(RISCV_SRC:.c=.o) $(RISCV_ASM:.S=.o)
+OBJS		:= $(FREERTOS_OBJ) $(RISCV_OBJ)
+TARGET		:= $(TOPDIR)/riscv.bin
 
 CFLAGS		:=							\
 		-Wall							\
 		-fomit-frame-pointer -fno-strict-aliasing		\
 		-I$(TOPDIR)/Source/include				\
 		-I$(TOPDIR)/riscv/include
+
+LDFLAGS		:= -static
 
 %.o:	%.c
 	@echo "    CC $<"
@@ -41,7 +52,11 @@ all:
 	@echo "    make clean"
 
 tao:	$(OBJS)
+	@echo "    LD $(TARGET)"
+	@$(CROSS_GCC) -o $(TARGET) $(LDFLAGS) $(OBJS)
+	@echo "    --- BINGO! ---"
 
 clean:
 	@rm -f $(OBJS)
+	@rm -f $(TARGET)
 
