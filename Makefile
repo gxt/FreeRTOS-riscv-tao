@@ -52,11 +52,13 @@ all:
 	@echo "    make clean"
 
 tao:	$(OBJS)
+	@ctags -R
 	@echo "    LD $(TARGET)"
 	@$(CROSS_GCC) -o $(TARGET) $(LDFLAGS) $(OBJS)
 	@echo "    --- BINGO! ---"
 
 clean:
+	@rm -f tags
 	@rm -f $(OBJS)
 	@rm -f $(TARGET)
 
