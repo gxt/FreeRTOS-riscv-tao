@@ -5,6 +5,8 @@
 
 CROSS_RISCV	?= /opt/riscv64/bin/riscv64-unknown-elf-
 CROSS_GCC	:= $(CROSS_RISCV)gcc
+CROSS_READELF	:= $(CROSS_RISCV)readelf
+CROSS_OBJDUMP	:= $(CROSS_RISCV)objdump
 
 TOPDIR		:= $(shell pwd)
 
@@ -28,7 +30,7 @@ RISCV_ASM	:=							\
 FREERTOS_OBJ	:= $(FREERTOS_SRC:.c=.o)
 RISCV_OBJ	:= $(RISCV_SRC:.c=.o) $(RISCV_ASM:.S=.o)
 OBJS		:= $(FREERTOS_OBJ) $(RISCV_OBJ)
-TARGET		:= $(TOPDIR)/riscv.bin
+FRANKY		:= $(TOPDIR)/franky
 
 CFLAGS		:=							\
 		-Wall							\
@@ -53,12 +55,14 @@ all:
 
 tao:	$(OBJS)
 	@ctags -R
-	@echo "    LD $(TARGET)"
-	@$(CROSS_GCC) -o $(TARGET) $(LDFLAGS) $(OBJS)
+	@echo "    LD $(FRANKY).bin"
+	@$(CROSS_GCC) -o $(FRANKY).bin $(LDFLAGS) $(OBJS)
+	@$(CROSS_OBJDUMP) -S $(FRANKY).bin > $(FRANKY).asm
+	@$(CROSS_READELF) -a $(FRANKY).bin > $(FRANKY).elf
 	@echo "    --- BINGO! ---"
 
 clean:
 	@rm -f tags
 	@rm -f $(OBJS)
-	@rm -f $(TARGET)
+	@rm -f $(FRANKY).*
 
