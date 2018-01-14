@@ -9,3 +9,8 @@ Not **everything** in FreeRTOS are reserved here:
 
 ## CodeStyle
 All files from FreeRTOS are transcoded by `dos2unix`
+
+## Resouces
+* [FreeRTOS homepage](https://www.freertos.org/)
+* [RISCV porting for FreeRTOSV8.2.3](https://interactive.freertos.org/hc/en-us/community/posts/210030246-32-bit-and-64-bit-RISC-V-using-GCC)
+* [RISCV homepage](https://riscv.org/)
