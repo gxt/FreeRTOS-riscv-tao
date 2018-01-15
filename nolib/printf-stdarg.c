@@ -147,7 +147,7 @@ static int print( char **out, const char *format, va_list args )
 				width += *format - '0';
 			}
 			if( *format == 's' ) {
-				register char *s = (char *)va_arg( args, int );
+				register char *s = (char *)va_arg( args, long );
 				pc += prints (out, s?s:"(null)", width, pad);
 				continue;
 			}
@@ -203,7 +203,7 @@ int sprintf(char *out, const char *format, ...)
 }
 
 
-int snprintf( char *buf, unsigned int count, const char *format, ... )
+int snprintf( char *buf, long count, const char *format, ... )
 {
         va_list args;
         
