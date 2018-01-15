@@ -7,6 +7,18 @@ Not **everything** in FreeRTOS are reserved here:
 * FreeRTOS/License dir reserved
 * FreeRTOS/Demo dir removed
 
+## Newlib or Nolib
+For Nolib:
+* string.c: only memset and memcpy
+* printf-stdarg.c: L3959 in task.c (but all 32-bit impl)
+> An alternative, tiny, third party, and limited functionality implementation
+> of sprintf() is provided in many of the FreeRTOS/Demo sub-directories in a
+> file called printf-stdarg.c (note printf-stdarg.c does not provide a full
+> snprintf() implementation!).
+
+For Newlib:
+* SHOULD gen toolchain with newlib support
+
 ## CodeStyle
 * All files from FreeRTOS are transcoded by `dos2unix`
 * 1 tab == 4 spaces for Source/ dir (FreeRTOS parts)
