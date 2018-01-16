@@ -46,7 +46,7 @@ CFLAGS		:=							\
 		-I$(TOPDIR)/riscv/include				\
 		-I$(TOPDIR)/nolib
 
-LDFLAGS		:= -Bstatic
+LDFLAGS		:= -Bstatic -T $(TOPDIR)/riscv/franky.ld
 
 %.o:	%.c
 	@echo "    CC $<"
