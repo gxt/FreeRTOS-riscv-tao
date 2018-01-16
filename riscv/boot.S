@@ -5,10 +5,10 @@
 
 	.align 6
 	.section .text,"ax",@progbits
-	.globl _start
+	.globl _mstart
 
 /* Startup code */
-_start:
+_mstart:
 	/* set all gp regs as zero */
 	.irp	regno, 1, 2, 3, 4, 5, 6, 7, 8, 9
 	li	x\regno, 0

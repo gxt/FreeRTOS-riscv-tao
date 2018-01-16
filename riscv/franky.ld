@@ -7,7 +7,7 @@
 OUTPUT_ARCH( "riscv" )
 
 /* Specify the default entry point to the program */
-ENTRY(_start)
+ENTRY(_mstart)
 
 /*****************************************************************************
  * Define the sections, and where they are mapped in memory 
