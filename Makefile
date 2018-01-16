@@ -37,8 +37,6 @@ RISCV_OBJ	:= $(RISCV_SRC:.c=.o) $(RISCV_ASM:.S=.o)
 OBJS		:= $(FREERTOS_OBJ) $(RISCV_OBJ)
 NOLIB_OBJ	:= $(NOLIB_SRC:.c=.o)
 
-FRANKY		:= $(TOPDIR)/franky
-
 CFLAGS		:=							\
 		-O0 -Wall -Werror -static				\
 		-fno-common -fno-builtin				\
@@ -47,9 +45,10 @@ CFLAGS		:=							\
 		-I$(TOPDIR)/riscv/include				\
 		-I$(TOPDIR)/nolib
 
+LDSCRIPT	:= $(TOPDIR)/riscv/tao.ld
 LDFLAGS		:= 							\
 		-Bstatic -nostdlib					\
-		-T $(TOPDIR)/riscv/franky.ld
+		-T $(LDSCRIPT)
 
 %.o:	%.c
 	@echo "    CC $<"
@@ -73,16 +72,17 @@ prepare:
 
 tao:	$(OBJS) tao-nolib
 
-tao-nolib: $(NOLIB_OBJ) $(TOPDIR)/riscv/franky.ld
-	@echo "    LD $(FRANKY).bin"
-	@$(CROSS_LD) $(LDFLAGS) -o $(FRANKY).bin $(OBJS) $(NOLIB_OBJ)
-	@$(CROSS_OBJDUMP) -S $(FRANKY).bin > $(FRANKY).asm
-	@$(CROSS_READELF) -a $(FRANKY).bin > $(FRANKY).elf
+tao-nolib: $(NOLIB_OBJ) $(LDSCRIPT)
+	@echo "    LD $(TOPDIR)/tao.bin"
+	@$(CROSS_LD) $(LDFLAGS) -o $(TOPDIR)/tao.bin $(OBJS) $(NOLIB_OBJ)
+	@$(CROSS_OBJDUMP) -S $(TOPDIR)/tao.bin > $(TOPDIR)/tao.asm
+	@$(CROSS_READELF) -a $(TOPDIR)/tao.bin > $(TOPDIR)/tao.elf
 	@echo "    --- BINGO! ---"
 
 clean:
 	@rm -f tags
 	@rm -f $(OBJS)
 	@rm -f $(NOLIB_OBJS)
-	@rm -f $(FRANKY).*
+	@rm -f $(LDSCRIPT)
+	@rm -f $(TOPDIR)/tao.*
 
