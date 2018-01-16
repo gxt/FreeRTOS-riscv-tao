@@ -12,6 +12,7 @@
 *.asm
 *.patch
 *.orig
+*.ld
 *~
 
 #
