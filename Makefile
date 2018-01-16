@@ -40,13 +40,16 @@ NOLIB_OBJ	:= $(NOLIB_SRC:.c=.o)
 FRANKY		:= $(TOPDIR)/franky
 
 CFLAGS		:=							\
-		-Wall							\
+		-O0 -Wall -Werror -static				\
+		-fno-common -fno-builtin				\
 		-fomit-frame-pointer -fno-strict-aliasing		\
 		-I$(TOPDIR)/Source/include				\
 		-I$(TOPDIR)/riscv/include				\
 		-I$(TOPDIR)/nolib
 
-LDFLAGS		:= -Bstatic -T $(TOPDIR)/riscv/franky.ld
+LDFLAGS		:= 							\
+		-Bstatic -nostdlib					\
+		-T $(TOPDIR)/riscv/franky.ld
 
 %.o:	%.c
 	@echo "    CC $<"

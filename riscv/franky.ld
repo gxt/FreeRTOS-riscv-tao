@@ -72,13 +72,11 @@ SECTIONS {
 		. = ALIGN(8);
 		*(.bss .bss.*)
 		*(.gnu.linkonce.b.*)
-		*(COMMON)
 
 		/* Writable uninitialized small data sections */
 		. = ALIGN(8);
 		*(.sbss .sbss.*)
 		*(.gnu.linkonce.sb.*)
-		*(.scommon)
 
 		PROVIDE( __bss_end = ABSOLUTE(.) );
 	}
