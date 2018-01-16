@@ -8,7 +8,7 @@
 #include "task.h"
 #include "queue.h"
 #include "timers.h"
-#include "stdio.h"
+#include "nolib.h"
 
 #define TASK1_TASK_PRIO			1
 #define TASK1_STK_SIZE			256

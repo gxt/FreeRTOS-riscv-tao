@@ -291,3 +291,8 @@ int	write( int i, char* c, int n)
 	return 0;
 }
 
+/* ugly code here, since printf will silently become puts by compiler */
+int puts(const char *s)
+{
+	return printf("%s\n", s);
+}
