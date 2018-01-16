@@ -3,6 +3,8 @@
  * Copyright (C) 2018 Guan Xuetao
  */
 
+#include "platform.h"
+
 /* Specify the machine architecture */
 OUTPUT_ARCH( "riscv" )
 
@@ -10,9 +12,11 @@ OUTPUT_ARCH( "riscv" )
 ENTRY(_mstart)
 
 /*****************************************************************************
- * Define the sections, and where they are mapped in memory 
+ * Define the sections, and where they are mapped in memory
  ****************************************************************************/
 SECTIONS {
+	. = PLATFORM_RAM_BASE;
+
 	. = ALIGN(64);
 	.init : {
 		*boot.o(.text)

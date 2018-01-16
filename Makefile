@@ -59,6 +59,10 @@ LDFLAGS		:= 							\
 	@echo "    CC $<"
 	@$(CROSS_GCC) -c $(CFLAGS) -o $@ $<
 
+%.ld:	%.ld.S
+	@echo "    LD $<"
+	@$(CROSS_GCC) -P -E $(CFLAGS) -o $@ $<
+
 all:
 	@echo Choose rules:
 	@echo "    make tao"
@@ -69,7 +73,7 @@ prepare:
 
 tao:	$(OBJS) tao-nolib
 
-tao-nolib: $(NOLIB_OBJ)
+tao-nolib: $(NOLIB_OBJ) $(TOPDIR)/riscv/franky.ld
 	@echo "    LD $(FRANKY).bin"
 	@$(CROSS_LD) $(LDFLAGS) -o $(FRANKY).bin $(OBJS) $(NOLIB_OBJ)
 	@$(CROSS_OBJDUMP) -S $(FRANKY).bin > $(FRANKY).asm
