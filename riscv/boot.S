@@ -10,15 +10,11 @@
 /* Startup code */
 _mstart:
 	/* set all gp regs as zero */
-	.irp	regno, 1, 2, 3, 4, 5, 6, 7, 8, 9
+	.irp	regno, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10		\
+		11, 12, 13, 14, 15, 16, 17, 18, 19, 20		\
+		21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
 	li	x\regno, 0
 	.endr
-	.irp	regno, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-	li	x1\regno, 0
-	li	x2\regno, 0
-	.endr
-	li	x30, 0
-	li	x31, 0
 
 	/* init bss section */
 
