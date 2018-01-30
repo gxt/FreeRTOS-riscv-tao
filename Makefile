@@ -18,7 +18,7 @@ FREERTOS_SRC	:=							\
 		$(TOPDIR)/Source/tasks.c				\
 		$(TOPDIR)/Source/timers.c				\
 		$(TOPDIR)/Source/event_groups.c				\
-		$(TOPDIR)/Source/portable/MemMang/heap_2.c
+		$(TOPDIR)/Source/portable/MemMang/heap_4.c
 
 RISCV_SRC	:=							\
 		$(TOPDIR)/riscv/port.c					\
