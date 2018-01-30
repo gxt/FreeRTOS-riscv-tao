@@ -3,6 +3,10 @@
  * Copyright (C) 2018 Guan Xuetao
  */
 #include <encoding.h>
+#include <platform.h>
+
+#define HART_STACK_SHIFT	(RISCV_PGSHIFT + 1)
+#define HART_STACK_SIZE		(RISCV_PGSIZE * 2)
 
 	.align 6
 	.section .text,"ax",@progbits
@@ -49,9 +53,18 @@ _mstart:
 205:
 
 	/* init stack */
+	la	sp, __stacks + HART_STACK_SIZE
+	csrr	t0, mhartid
+	slli	t1, t0, HART_STACK_SHIFT
+	add	sp, sp, t1
 
 	/* call main func just for build process */
 	j	main
 
 trap_vector:
 	j	trap_vector
+
+	.section .bss
+	.align	HART_STACK_SHIFT
+__stacks:
+	.space	HART_STACK_SIZE * PLATFORM_MAX_HARTS
