@@ -40,6 +40,13 @@ _mstart:
 203:
 
 	/* init bss section */
+	la	a0, __bss_start
+	la	a1, __bss_end
+204:	sd	x0, 0(a0)
+	bgeu	a0, a1, 205f
+	addi	a0, a0, 8
+	j	204b
+205:
 
 	/* init stack */
 
