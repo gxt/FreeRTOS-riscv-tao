@@ -7,6 +7,11 @@ Not **everything** in FreeRTOS are reserved here:
 * FreeRTOS/License dir reserved
 * FreeRTOS/Demo dir removed
 
+## RISC-V parts
+* Rocket, 2 harts
+* Privileged ISA: v1.9.1
+* User-level ISA: v2.0
+
 ## Newlib or Nolib
 For Nolib:
 * string.c: only memset and memcpy
