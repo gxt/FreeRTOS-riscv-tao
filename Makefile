@@ -26,7 +26,7 @@ RISCV_SRC	:=							\
 
 RISCV_ASM	:=							\
 		$(TOPDIR)/riscv/portasm.S				\
-		$(TOPDIR)/riscv/boot.S
+		$(TOPDIR)/riscv/mentry.S
 
 NOLIB_SRC	:=							\
 		$(TOPDIR)/nolib/printf-stdarg.c				\

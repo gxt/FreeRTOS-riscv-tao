@@ -19,7 +19,7 @@ SECTIONS {
 
 	. = ALIGN(64);
 	.init : {
-		*boot.o(.text)
+		*mentry.o(.text)
 	}
 
 	. = ALIGN(64);
