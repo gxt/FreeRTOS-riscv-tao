@@ -30,6 +30,15 @@ _mstart:
 	li	x\regno, 0
 	.endr
 
+	/* ONLY hartid 0 handle boot code */
+	csrr	t0, mhartid
+	beqz	t0, 203f
+202:
+	wfi
+	csrr	t0, mhartid
+	bnez	t0, 202b
+203:
+
 	/* init bss section */
 
 	/* init stack */
